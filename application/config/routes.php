@@ -56,5 +56,12 @@ $route['index/login-user-mobile'] = 'preLogin/PreLoginIndex/loginUserMobile';
 $route['index/register-token-mobile'] = 'preLogin/PreLoginIndex/registerTokenMobile';
 $route['index/update-token-mobile'] = 'preLogin/PreLoginIndex/updateTokenMobile';
 
+
+
+$route['index/add-custom-number-mobile'] = 'home/Home/addCustomNumberMobile';
+$route['index/delete-custom-number-mobile'] = 'home/Home/deleteCustomNumberMobile';
+$route['index/update-custom-number-mobile'] = 'home/Home/updateCustomNumberMobile';
+$route['index/get-custom-number-mobile'] = 'home/Home/getCustomNumberMobile';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
