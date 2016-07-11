@@ -51,6 +51,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'welcome';
 $route['index'] = 'preLogin/PreLoginIndex';
+$route['index/register-user-mobile'] = 'preLogin/PreLoginIndex/registerUserMobile';
+$route['index/login-user-mobile'] = 'preLogin/PreLoginIndex/loginUserMobile';
+$route['index/register-token-mobile'] = 'preLogin/PreLoginIndex/registerTokenMobile';
+$route['index/update-token-mobile'] = 'preLogin/PreLoginIndex/updateTokenMobile';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
