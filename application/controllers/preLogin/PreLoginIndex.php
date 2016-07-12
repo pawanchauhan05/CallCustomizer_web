@@ -6,6 +6,7 @@ class PreLoginIndex extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('preLogin/index');
+      echo base_url()."mera/path";
 	}
 
 	public function registerUserMobile() { 

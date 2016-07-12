@@ -63,5 +63,8 @@ $route['index/delete-custom-number-mobile'] = 'home/Home/deleteCustomNumberMobil
 $route['index/update-custom-number-mobile'] = 'home/Home/updateCustomNumberMobile';
 $route['index/get-custom-number-mobile'] = 'home/Home/getCustomNumberMobile';
 
+$route['admin'] = 'admin/Admin';
+
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
