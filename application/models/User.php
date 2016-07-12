@@ -7,7 +7,16 @@ class User extends CI_Model {
       } 
 
       public function registerUserMobile($user) { 
-         if ($this->db->insert("Users", $user)) { 
+         $data = array( 
+            'created_at' => time(),
+            'updated_at' => time(),
+            'name' => $user->name,
+            'email' => $user->email,
+            'password' => $user->password,
+            'loginType' => $user->loginType
+         );
+
+         if ($this->db->insert("Users", $data)) { 
             return "true"; 
          } else {
          	return "false";
@@ -21,8 +30,8 @@ class User extends CI_Model {
 
       public function loginUserMobile($userEmail, $userPassword) {
 
-	      	$condition = "email =" . "'" . $userEmail . "' AND " . "password =" . "'" . $userPassword . "'";
-	      	$this->db->select('*');
+      	$condition = "email =" . "'" . $userEmail . "' AND " . "password =" . "'" . $userPassword . "'";
+      	$this->db->select('*');
 			$this->db->from('Users');
 			$this->db->where($condition);
 			$this->db->limit(1);

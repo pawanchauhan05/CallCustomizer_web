@@ -16,12 +16,11 @@ class PreLoginIndex extends CI_Controller {
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          $json = file_get_contents('php://input');
          $user = (object)json_decode($json);
-
          $count = $this->User->isUserExist($user->email);
          if($count == 0) {
             $status = $this->User->registerUserMobile($user);
          } else {
-            $status = "user exist";
+            $status = "user already exist";
          }
 
          echo "{ 'status' : '$status' }";
@@ -38,9 +37,12 @@ class PreLoginIndex extends CI_Controller {
          $count = $this->User->isUserExist($user->email);
          if($count == 1) {
             $row = $this->User->loginUserMobile($user->email, $user->password);
+            header('Content-Type: application/json');
             echo json_encode($row);
          } else {
-            echo $status = "user does not exist";
+            echo " { 
+               ".'"email"'." : ".'"user does not exist"'." 
+            } ";
          } 
 
       }
