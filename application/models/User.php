@@ -12,7 +12,7 @@ class User extends CI_Model {
             'updated_at' => time(),
             'name' => $user->name,
             'email' => $user->email,
-            'password' => $user->password,
+            'password' => md5($user->password),
             'loginType' => $user->loginType
          );
 
@@ -29,7 +29,6 @@ class User extends CI_Model {
       }
 
       public function loginUserMobile($userEmail, $userPassword) {
-
       	$condition = "email =" . "'" . $userEmail . "' AND " . "password =" . "'" . $userPassword . "'";
       	$this->db->select('*');
 			$this->db->from('Users');

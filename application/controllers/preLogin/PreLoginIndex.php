@@ -6,7 +6,9 @@ class PreLoginIndex extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('preLogin/index');
-      echo base_url()."mera/path";
+      $msg = 'My secret message';
+      echo $encrypted_string = $this->encrypt->encode($msg);
+      echo $this->encrypt->decode($encrypted_string);
 	}
 
 	public function registerUserMobile() { 
@@ -23,7 +25,7 @@ class PreLoginIndex extends CI_Controller {
             $status = "user already exist";
          }
 
-         echo "{ 'status' : '$status' }";
+         echo "{ ".'"status"'." : $status }";
 
       }
 
@@ -36,13 +38,12 @@ class PreLoginIndex extends CI_Controller {
 
          $count = $this->User->isUserExist($user->email);
          if($count == 1) {
-            $row = $this->User->loginUserMobile($user->email, $user->password);
+
+            $row = $this->User->loginUserMobile($user->email, md5($user->password));
             header('Content-Type: application/json');
             echo json_encode($row);
          } else {
-            echo " { 
-               ".'"email"'." : ".'"user does not exist"'." 
-            } ";
+            echo " { ".'"email"'." : ".'"user does not exist"'." } ";
          } 
 
       }
@@ -74,7 +75,7 @@ class PreLoginIndex extends CI_Controller {
             $status = "user does not exist";
          }
 
-         echo "{ 'status' : '$status' }";
+         echo "{ ".'"status"'." : $status }";
       }
    }
 
