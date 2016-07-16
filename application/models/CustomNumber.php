@@ -14,10 +14,17 @@ class CustomNumber extends CI_Model {
             'name' => $customNumber->name,
             'customNumber' => $customNumber->customNumber
          );
-      	if ($this->db->insert("CustomNumbers", $data)) { 
-            return '"true"'; 
+
+         $status = $this->checkMobileNumberExist($customNumber->email, $customNumber->customNumber);
+
+         if($status) {
+            return '"false"';
          } else {
-         	return '"false"';
+            if ($this->db->insert("CustomNumbers", $data)) { 
+               return '"true"'; 
+            } else {
+               return '"false"';
+            }
          }
 
       }
@@ -56,6 +63,21 @@ class CustomNumber extends CI_Model {
       	$query = $this->db->query("SELECT * FROM CustomNumbers WHERE email = '$userEmail' ");
       	return $query->result();
 
+      }
+
+      public function checkMobileNumberExist($userEmail, $customNumber) {
+         $condition = "email =" . "'" . $userEmail . "' AND " . "customNumber =" . "'" . $customNumber . "'";
+         $this->db->select('*');
+         $this->db->from('CustomNumbers');
+         $this->db->where($condition);
+         $this->db->limit(1);
+         $query = $this->db->get();
+         $row = $query->row();
+         if(isset($row)) {
+            return true;
+         } else {
+            return false;
+         }
       }
 
 }
