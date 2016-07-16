@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 11, 2016 at 05:44 PM
+-- Generation Time: Jul 16, 2016 at 05:51 PM
 -- Server version: 5.7.12-0ubuntu1.1
 -- PHP Version: 7.0.4-7ubuntu2.1
 
@@ -30,16 +30,17 @@ CREATE TABLE `CustomNumbers` (
   `id` int(11) NOT NULL,
   `email` varchar(55) NOT NULL,
   `name` varchar(25) NOT NULL,
-  `customNumber` double NOT NULL
+  `customNumber` double NOT NULL,
+  `created_at` double NOT NULL,
+  `updated_at` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `CustomNumbers`
 --
 
-INSERT INTO `CustomNumbers` (`id`, `email`, `name`, `customNumber`) VALUES
-(2, 'pawansinghchouhan05@gmail.com', 'sunny', 54321),
-(3, 'pawansinghchouhan05@gmail.com', 'sunny', 1264864684);
+INSERT INTO `CustomNumbers` (`id`, `email`, `name`, `customNumber`, `created_at`, `updated_at`) VALUES
+(38, 'p@e.com', 'Gud', 10, 1468670430, 1468670430);
 
 -- --------------------------------------------------------
 
@@ -59,7 +60,8 @@ CREATE TABLE `Tokens` (
 --
 
 INSERT INTO `Tokens` (`id`, `email`, `token`, `updated_at`) VALUES
-(1, 'pawansinghchouhan05@gmail.com', 'sd', 12345678);
+(15, 'p@e.com', 'e5CyhgrhluI:APA91bFVTEYgjRw06BbznADzZhUcD1GOjgefkcoYaS-qOdYkGIHUkoZ7y72OUN3v8L4tCDeNhoBQkbaPcUQYeEtzwALxchLduf_SQnRlM-OmacLWsZLWkAdPDeNZgySCGqdXl-qO8LHf', 1468644563),
+(17, 'p@e.com', 'e_47NE26rGU:APA91bFTPI8lDq5HZVbzYwqbYPPj-7JGBPBC4yrQZElzH0Uejz3jzPFJ7-EieiK152x0YKcc3ceDXXTWl2FC3aCGQ1SCVMFAEOTQ9cnr-IAD2kpHshVMxrcHP9jUQRZIIYUc4pAwlGbr', 1468656442);
 
 -- --------------------------------------------------------
 
@@ -71,7 +73,7 @@ CREATE TABLE `Users` (
   `id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
   `email` varchar(55) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` varchar(250) NOT NULL,
   `loginType` varchar(20) NOT NULL,
   `created_at` double NOT NULL,
   `updated_at` double NOT NULL
@@ -82,7 +84,7 @@ CREATE TABLE `Users` (
 --
 
 INSERT INTO `Users` (`id`, `name`, `email`, `password`, `loginType`, `created_at`, `updated_at`) VALUES
-(1, 'pawan', 'pawansinghchouhan05@gmail.com', '12345678', 'android', 122311545, 164896413);
+(6, 'sunny', 'p@e.com', '827ccb0eea8a706c4c34a16891f84e7b', 'LoginTypeAuth', 1468570441, 1468570441);
 
 --
 -- Indexes for dumped tables
@@ -114,17 +116,17 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT for table `CustomNumbers`
 --
 ALTER TABLE `CustomNumbers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 --
 -- AUTO_INCREMENT for table `Tokens`
 --
 ALTER TABLE `Tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
