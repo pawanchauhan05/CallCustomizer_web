@@ -16,7 +16,7 @@ class Home extends CI_Controller {
             $status = "user does not exist";
          }
 
-         echo "{ 'status' : '$status' }";
+         echo "{ ".'"status"'." : $status }";
 
       }
 	}
@@ -34,7 +34,7 @@ class Home extends CI_Controller {
             $status = "user does not exist";
          }
 
-         echo "{ 'status' : '$status' }";
+         echo "{ ".'"status"'." : $status }";
 
       }
 	}
@@ -52,7 +52,7 @@ class Home extends CI_Controller {
             $status = "user does not exist";
          }
 
-         echo "{ 'status' : '$status' }";
+         echo "{ ".'"status"'." : $status }";
 
       }
 	}
@@ -66,12 +66,14 @@ class Home extends CI_Controller {
          $count = $this->User->isUserExist($data->email);
          if($count == 1) {
             $row = $this->CustomNumber->getCustomNumberMobile($data->email);
-            $status =  json_encode($row);
+            if(isset($row)) {
+               echo json_encode($row);
+            }
          } else {
             $status = "user does not exist";
          }
 
-         echo "{ 'status' : '$status' }";
+         //echo "{ 'status' : '$status' }";
 
       }
 	}

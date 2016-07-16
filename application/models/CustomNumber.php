@@ -7,10 +7,17 @@ class CustomNumber extends CI_Model {
       } 
 
       public function addCustomNumberMobile($customNumber) {
-      	if ($this->db->insert("CustomNumbers", $customNumber)) { 
-            return "true"; 
+         $data = array( 
+            'created_at' => time(),
+            'updated_at' => time(),
+            'email' => $customNumber->email,
+            'name' => $customNumber->name,
+            'customNumber' => $customNumber->customNumber
+         );
+      	if ($this->db->insert("CustomNumbers", $data)) { 
+            return '"true"'; 
          } else {
-         	return "false";
+         	return '"false"';
          }
 
       }
@@ -24,9 +31,9 @@ class CustomNumber extends CI_Model {
 
       	$this->db->where($data);
       	if($this->db->delete("CustomNumbers")) {
-      		return "true";
+      		return '"true"';
       	} else {
-      		return "false";
+      		return '"false"';
       	}
       }
 
@@ -36,22 +43,19 @@ class CustomNumber extends CI_Model {
             'customNumber' => $customNumber->customNumber
          ); 
 
-		$this->db->set($data); 
-	    $this->db->where("email", $customNumber->email); 
-	    if($this->db->update("CustomNumbers", $data)) {
-	    	return "true";
-	    } else {
-	    	return "false";
-	    }
+      	$this->db->set($data); 
+         $this->db->where("email", $customNumber->email); 
+         if($this->db->update("CustomNumbers", $data)) {
+          	return '"true"';
+         } else {
+          	return '"false"';
+         }
       }
-
 
       public function getCustomNumberMobile($userEmail) {
       	$query = $this->db->query("SELECT * FROM CustomNumbers WHERE email = '$userEmail' ");
       	return $query->result();
 
       }
-
-
 
 }

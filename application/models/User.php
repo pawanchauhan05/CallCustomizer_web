@@ -35,7 +35,13 @@ class User extends CI_Model {
 			$this->db->where($condition);
 			$this->db->limit(1);
 			$query = $this->db->get();
-			return $query->row();
+			$row = $query->row();
+         if(isset($row)) {
+            return $query->row();
+         } else {
+            return " { ".'"status"'." : ".'"invalid credentials"'." } ";
+         }
+
 
       }
 

@@ -38,7 +38,6 @@ class PreLoginIndex extends CI_Controller {
 
          $count = $this->User->isUserExist($user->email);
          if($count == 1) {
-
             $row = $this->User->loginUserMobile($user->email, md5($user->password));
             header('Content-Type: application/json');
             echo json_encode($row);
@@ -52,20 +51,29 @@ class PreLoginIndex extends CI_Controller {
 
    public function registerTokenMobile() {
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+         $status = "";
          $json = file_get_contents('php://input');
          $token = (object)json_decode($json);
          $count = $this->User->isUserExist($token->email);
          if($count == 1) {
-            $status = $this->Token->registerTokenMobile($token);
+            if($this->Token->isUserExist($token->email) == 1) {
+               $status = $this->Token->registerTokenMobile($token);
+            } else {
+               $status = '"token alrady exist"';
+            }
+            
          } else {
-            $status = "user exist";
+            $status = '"user does not exist"';
          }
+
+         echo "{ ".'"status"'." : $status }";
 
       }
    }
 
    public function updateTokenMobile() {
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+         $status = "";
          $json = file_get_contents('php://input');
          $token = (object)json_decode($json);
          $count = $this->User->isUserExist($token->email);
