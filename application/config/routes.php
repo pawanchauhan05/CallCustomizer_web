@@ -64,6 +64,7 @@ $route['index/update-custom-number-mobile'] = 'home/Home/updateCustomNumberMobil
 $route['index/get-custom-number-mobile'] = 'home/Home/getCustomNumberMobile';
 
 $route['admin'] = 'admin/Admin';
+$route['admin/users'] = 'admin/Admin';
 
 
 $route['404_override'] = '';

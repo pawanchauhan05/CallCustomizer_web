@@ -33,9 +33,10 @@
         <?php $this->load->view('admin/common/navigation'); ?>
 
         <?php $this->load->view('admin/common/header'); ?>
-      
-        <?php $this->load->view('admin/main'); ?>
-        
+
+        <div class="right_col" role="main">
+          <?php $this->AdminModel->loadView(); ?>
+        </div>
 
         <?php $this->load->view('admin/common/footer'); ?>
 
