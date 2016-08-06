@@ -21,6 +21,7 @@ class CustomNumber extends CI_Model {
             return '"false"';
          } else {
             if ($this->db->insert("CustomNumbers", $data)) { 
+               $this->User->updateNumberStatusMobile($customNumber->email);
                return '"true"'; 
             } else {
                return '"false"';
@@ -42,6 +43,18 @@ class CustomNumber extends CI_Model {
       	} else {
       		return '"false"';
       	}
+      }
+
+      public function deleteAllCustomNumberMobile($email) {
+         $data = array (
+            'email' => $email
+         );
+         $this->db->where($data);
+         if($this->db->delete("CustomNumbers")) {
+            return '"true"';
+         } else {
+            return '"false"';
+         }
       }
 
       public function updateCustomNumberMobile($customNumber) {

@@ -13,7 +13,8 @@ class User extends CI_Model {
             'name' => $user->name,
             'email' => $user->email,
             'password' => md5($user->password),
-            'loginType' => $user->loginType
+            'loginType' => $user->loginType,
+            'numberStatus' => 0
          );
 
          if ($this->db->insert("Users", $data)) { 
@@ -43,6 +44,15 @@ class User extends CI_Model {
          }
 
 
+      }
+
+      public function updateNumberStatusMobile($email) {
+         $data = array( 
+            'numberStatus' => 1
+         ); 
+         $this->db->set($data); 
+         $this->db->where("email", $email); 
+         $this->db->update("Users", $data);
       }
 
 }

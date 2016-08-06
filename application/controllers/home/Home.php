@@ -78,4 +78,18 @@ class Home extends CI_Controller {
       }
 	}
 
+
+   public function syncDataFromMobile() {
+      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+         $json = file_get_contents('php://input');
+         $status = '"sync"';
+         $data = (Array)json_decode($json);
+         $this->CustomNumber->deleteAllCustomNumberMobile($data[0]->email);
+         foreach($data as $key => $value) {
+            $this->CustomNumber->addCustomNumberMobile($value); 
+         }
+         echo "{ ".'"status"'." : $status }";
+      }
+   }
+
 }

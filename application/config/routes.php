@@ -62,6 +62,7 @@ $route['index/add-custom-number-mobile'] = 'home/Home/addCustomNumberMobile';
 $route['index/delete-custom-number-mobile'] = 'home/Home/deleteCustomNumberMobile';
 $route['index/update-custom-number-mobile'] = 'home/Home/updateCustomNumberMobile';
 $route['index/get-custom-number-mobile'] = 'home/Home/getCustomNumberMobile';
+$route['index/sync-data-from-mobile'] = 'home/Home/syncDataFromMobile';
 
 $route['admin'] = 'admin/Admin';
 $route['admin/users'] = 'admin/Admin';
