@@ -66,6 +66,7 @@ $route['index/sync-data-from-mobile'] = 'home/Home/syncDataFromMobile';
 
 $route['admin'] = 'admin/Admin';
 $route['admin/users'] = 'admin/Admin';
+$route['admin/CustomNumbers'] = 'admin/Admin';
 
 
 $route['404_override'] = '';

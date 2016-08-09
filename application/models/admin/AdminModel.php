@@ -8,11 +8,17 @@ class AdminModel extends CI_Model {
 
     public function loadView() {
     	$content = 'admin/dashboard';
+    	$data = array();
     	if($this->uri->segment(2) != null) {
 			switch ($this->uri->segment(2)) {
 				case 'users':
-					$content = 'admin/dashboard';
+					$content = 'admin/Users';
 					break;
+
+				case 'CustomNumbers':
+					$content = 'admin/CustomNumbers';
+					break;
+
 				
 				default:
 					$content = 'admin/dashboard';
@@ -21,6 +27,16 @@ class AdminModel extends CI_Model {
 		}
     	$this->load->view($content);
 
+    }
+
+    public function userDetails() {
+    	$query = $this->db->query("SELECT * FROM Users");
+      	return $query->result();
+    }
+
+    public function customNumberDetails() {
+    	$query = $this->db->query("SELECT * FROM CustomNumbers");
+      	return $query->result();
     }
 
 }
