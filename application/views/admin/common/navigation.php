@@ -13,7 +13,7 @@
       </div>
       <div class="profile_info">
         <span>Welcome,</span>
-        <h2>John Doe</h2>
+        <h2><?php $sessionData = $this->AdminModel->readSessionData(); echo $sessionData['sessionData']['name']; ?></h2>
       </div>
     </div>
     <!-- /menu profile quick info -->
@@ -26,14 +26,14 @@
         <h3>General</h3>
         <ul class="nav side-menu">
           
-          <li><a href="<?php echo base_url()."index.php/admin"; ?>"><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+          <li><a href="<?php echo base_url()."index.php/admin"; ?>"><i class="fa fa-home"></i> Home </a>
           </li>
 
-          <li><a><i class="fa fa-home"></i> Users <span class="fa fa-chevron-down"></span></a>
+          <li><a><i class="fa fa-users"></i> Users <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="<?php echo base_url()."index.php/admin/users"; ?>">Registered Users</a></li>
               <li><a href="<?php echo base_url()."index.php/admin/CustomNumbers"; ?>">Custom Numbers</a></li>
-              <li><a href="form_validation.html">Tokens</a></li>
+              <li><a href="<?php echo base_url()."index.php/admin/Tokens"; ?>">Tokens</a></li>
             </ul>
           </li>
           <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>

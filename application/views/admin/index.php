@@ -35,19 +35,20 @@
 
   <body class="nav-md">
     <div class="container body">
-      <div class="main_container">
 
-        <?php $this->load->view('admin/common/navigation'); ?>
+      <?php 
+        // TODO check proper login or home
+        //  $this->AdminModel->stopSession();
+        $sessionData = $this->AdminModel->readSessionData();
+        if(isset($sessionData['sessionData'])) {
+          $this->load->view('admin/main');
+        } else {
+          $this->load->view('admin/login');
+        }
 
-        <?php $this->load->view('admin/common/header'); ?>
+      ?>
 
-        <div class="right_col" role="main">
-          <?php $this->AdminModel->loadView(); ?>
-        </div>
 
-        <?php $this->load->view('admin/common/footer'); ?>
-
-      </div>
     </div>
 
     <!-- jQuery -->
