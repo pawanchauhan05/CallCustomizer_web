@@ -66,6 +66,12 @@ class AdminModel extends CI_Model {
         return $sessionData = $this->session->all_userdata(); 
     }
 
+    public function totalCount($tableName) {
+        $this->db->from($tableName);
+        $query = $this->db->get();
+        return $rowcount = $query->num_rows();
+    }
+
 
 
 }

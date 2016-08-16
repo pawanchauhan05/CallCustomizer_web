@@ -14,7 +14,7 @@ class Admin extends CI_Controller {
         if(isset($data)) {
         	$this->AdminModel->startSession($data->name, $data->email);
         	$this->index();
-        }
+        } 
     }
 
     public function logout() {
