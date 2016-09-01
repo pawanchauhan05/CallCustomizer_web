@@ -30,6 +30,7 @@
                 <th>Created</th>
                 <th>Last Login</th>
                 <th>Numbers</th>
+                <th>Delete</th>
               </tr>
             </thead>
 
@@ -43,15 +44,54 @@
                   <td><?php echo $row->email;  ?></td>
                   <td><?php echo date("d F Y", $row->created_at);  ?></td>
                   <td><?php echo date("d F Y", $row->updated_at);  ?></td>
-                  <td><?php echo $row->numberStatus = 0 ? "Not Available" : "Available"  ?></td>
+                  <td><?php echo $row->numberStatus == 0 ? "Not Available" : "Available"  ?></td>
+                  <?php $key = $this->AdminModel->encode($row->email); ?>
+                  <td><a href="#" onClick='createPopup("<?php echo $key ?>")' class="btn btn-danger btn-xs">Delete <span class="glyphicon glyphicon-remove-circle"></span></a></td>
                 </tr>
               <?php } } ?>
               
             </tbody>
           </table>
+
+          <div id="myModal" class="modal fade">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title">Confirmation</h4>
+                      </div>
+                      <div class="modal-body">
+                          <p>Do you want to delete this user ?</p>
+                          <p class="text-warning"><small>If you delete, user data deleted.</small></p>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" onclick="deleteUser()">Delete</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
         </div>
       </div>
     </div>
+
+    <script type="text/javascript">
+      tempEmail = "";
+      function createPopup(email) {
+        tempEmail = email;
+        $("#myModal").modal('show');
+      }
+
+      function deleteUser() {
+        window.location.href = 'http://localhost/CallCustomizer_web/index.php/admin/deleteUser/'+tempEmail;
+        tempEmail = "";
+      }
+
+
+
+    </script>
 
     <!-- <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="x_panel">

@@ -71,6 +71,8 @@ $route['admin/users'] = 'admin/Admin';
 $route['admin/CustomNumbers'] = 'admin/Admin';
 $route['admin/Tokens'] = 'admin/Admin';
 
+$route['admin/deleteUser/:any'] = 'admin/Admin/deleteUser';
+
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
