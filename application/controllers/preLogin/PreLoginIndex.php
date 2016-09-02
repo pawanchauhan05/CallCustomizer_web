@@ -49,6 +49,42 @@ class PreLoginIndex extends CI_Controller {
             } 
         }
     }
+    
+    /**
+     * to register user via fb from mobile devices
+     */
+    public function facebookRegisterUserMobile() {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $json = file_get_contents('php://input');
+            $user = (object) json_decode($json);
+            $count = $this->User->isUserExist($user->email);
+            if ($count == 0) {
+                if($this->User->facebookRegisterUserMobile($user)) {
+                    $this->output
+                    ->set_status_header(200)
+                    ->set_content_type('application/json', 'utf-8')
+                    ->set_output(" { ".'"status"'." : ".'"User successfuly registered. Please login first."'." } ")
+                    ->_display();
+                    exit();
+                } else {
+                    $this->output
+                    ->set_status_header(401)
+                    ->set_content_type('application/json', 'utf-8')
+                    ->set_output(" { ".'"status"'." : ".'"Internal Server Error."'." } ")
+                    ->_display();
+                    exit();
+                } 
+            } else {
+                $this->output
+                        ->set_status_header(401)
+                        ->set_content_type('application/json', 'utf-8')
+                        ->set_output(" { " . '"status"' . " : " . '"user already exist"' . " } ")
+                        ->_display();
+                exit();
+            } 
+        }
+    }
 
     /**
      * to login user from mobile devices
@@ -88,10 +124,10 @@ class PreLoginIndex extends CI_Controller {
             $token = (object) json_decode($json);
             $count = $this->User->isUserExist($token->email);
             if ($count == 1) {
-                if ($this->Token->isUserExist($token->email) == 1) {
+                if ($this->Token->isUserExist($token->email) == 0) {
                     $status = $this->Token->registerTokenMobile($token);
                 } else {
-                    $status = '"token alrady exist"';
+                    $status = '"token already exist"';
                 }
             } else {
                 $status = '"user does not exist"';
