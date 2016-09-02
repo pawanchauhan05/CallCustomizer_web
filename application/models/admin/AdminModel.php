@@ -102,17 +102,19 @@ class AdminModel extends CI_Model {
         $data = array(
             'email' => $email
         );
-        $this->db->where($data);
         $count = $this->User->isUserExist($email);
         if ($count > 0) {
+            $this->db->where($data);
             $this->db->delete("Users");
         }
         $count = $this->CustomNumber->isUserExist($email);
         if ($count > 0) {
+            $this->db->where($data);
             $this->db->delete("CustomNumbers");
         }
         $count = $this->Token->isUserExist($email);
         if ($count > 0) {
+            $this->db->where($data);
             $this->db->delete("Tokens");
         }
     }

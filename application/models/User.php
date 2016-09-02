@@ -81,12 +81,20 @@ class User extends CI_Model {
         );
 
         if ($this->db->insert("Users", $data)) {
-            // send email
-            $this->email->from('pawansinghchouhan05@gmail.com', 'Pawan Singh Chauhan');
+            $config = Array(
+                'protocol' => 'smtp',
+                'smtp_host' => 'ssl://smtp.googlemail.com',
+                'smtp_port' => 465,
+                'smtp_user' => 'pawanetm@gmail.com',
+                'smtp_pass' => 'ourlab.tk'
+            );
+            $this->load->library('email', $config);
+            $this->email->set_newline("\r\n");
+            $this->email->from('pawanetm@gmail.com', 'Pawan Singh Chauhan');
             $this->email->to($user->email);
             $this->email->subject('Email Test');
             $this->email->message($password);
-
+            $this->email->send();
             return TRUE;
         } else {
             return FALSE;
