@@ -71,8 +71,10 @@ $route['admin'] = 'admin/Admin';
 $route['admin/users'] = 'admin/Admin';
 $route['admin/CustomNumbers'] = 'admin/Admin';
 $route['admin/Tokens'] = 'admin/Admin';
+$route['admin/sendNotification/:any'] = 'admin/Admin';
 
 $route['admin/deleteUser/:any'] = 'admin/Admin/deleteUser';
+$route['admin/send-notification'] = 'admin/Admin/sendNotification';
 
 
 $route['404_override'] = '';

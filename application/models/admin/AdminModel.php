@@ -12,10 +12,15 @@ class AdminModel extends CI_Model {
     /**
      * to load view while user click on link
      */
-    public function loadView() {
-        $content = 'admin/dashboard';
+    public function loadView($uri) {
+        if($uri == '') {
+            $content = 'admin/dashboard';  
+        } else {
+            $content = $uri; 
+        }
+        
         $data = array();
-        if ($this->uri->segment(2) != null) {
+        if ($this->uri->segment(2) != null && $uri == '') {
             switch ($this->uri->segment(2)) {
                 case 'users':
                     $content = 'admin/Users';
@@ -28,14 +33,20 @@ class AdminModel extends CI_Model {
                 case 'Tokens':
                     $content = 'admin/tokens';
                     break;
-
-
+                
+                case 'sendNotification':
+                    $content = 'admin/sendNotification';
+                    $email = $this->AdminModel->decode($this->uri->segment(3));
+                    $row = $this->Token->getToken($email);
+                    $data = array('key' => $row->token);
+                    break;
+                
                 default:
                     $content = 'admin/dashboard';
                     break;
             }
-        }
-        $this->load->view($content);
+        } else {  }
+        $this->load->view($content, $data);
     }
 
     // TODO create common function for userDetails, customNumberDetails, tokenDetails
@@ -139,8 +150,64 @@ class AdminModel extends CI_Model {
             return " { " . '"status"' . " : " . '"invalid credentials"' . " } ";
         }
     }
+    
+    public function sendNotification($registrationToken, $body, $title) {
+        $apiAccessKey = "AIzaSyCT9zM9OhFBTXap2Y6jpkWMHUgP_eOKKWM";
+        
+        $notification = array (
+            'body' => $body,
+            'title' => $title,
+            'icon' => 'myicon',
+        );
 
-    /*     * *************************** For Encryption only ******************************************* */
+        $fields = array (
+            'to' => $registrationToken,
+            'notification' => $notification,
+            'priority' => 'high'
+        );
+        
+        $headers = array (
+            'Authorization: key=' . $apiAccessKey,
+            'Content-Type: application/json'
+        );
+        
+        /*
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+        $result = curl_exec($ch);
+        curl_close($ch);
+        echo $result;
+         * 
+         */
+         
+        
+        
+        $jsonDataEncoded = json_encode($fields);
+        $this->curl->create('https://fcm.googleapis.com/fcm/send');
+        $this->curl->option(CURLOPT_HTTPHEADER, $headers);
+        $this->curl->post($jsonDataEncoded);
+        $result = $this->curl->execute();
+        $data = array(
+          'uri' => 'admin/tokens',
+          'success' => 'success'
+        );
+        $this->customView($data);
+    }
+    
+    public function customView($data) {
+        $this->load->view('admin/index', $data);
+    }
+
+
+
+
+
+    /**************************** For Encryption only ******************************************* */
 
     var $skey = "SuPerEncRKey2016";
 

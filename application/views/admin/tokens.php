@@ -22,12 +22,20 @@
           <div class="clearfix"></div>
         </div>
         <div class="x_content">
+            <?php if($success != '') { ?>
+            <div class="alert alert-success fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!</strong> Notification has been sent successfuly.
+            </div>
+            <?php } ?>
+            
           <table id="datatable" class="table table-striped table-bordered">
             <thead>
               <tr>
                 <th>Email</th>
                 <th>Token</th>
                 <th>Updated</th>
+                <th>Notification</th>
               </tr>
             </thead>
 
@@ -40,6 +48,8 @@
                   <td><?php echo $row->email;  ?></td>
                   <td><?php echo $row->token;  ?></td>
                   <td><?php echo date("d F Y", $row->updated_at);  ?></td>
+                  <?php $key = $this->AdminModel->encode($row->email); ?>
+                  <td><a href="<?php echo base_url()."index.php/admin/sendNotification/".$key ?>" class="btn btn-success btn-xs">Send <span class="glyphicon glyphicon-share-alt"></span></a></td>
                 </tr>
               <?php } } ?>
               

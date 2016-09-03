@@ -56,5 +56,17 @@ class Token extends CI_Model {
         $query = $this->db->query("SELECT * FROM Tokens WHERE email = '$userEmail' ");
         return $query->num_rows();
     }
+    
+    
+    public function getToken($email) {
+        $this->db->select('token');
+        $this->db->from('Tokens');
+        $this->db->where("email", $email);
+        $query = $this->db->get();
+        $row = $query->row();
+        if (isset($row)) {
+            return $query->row();
+        }
+    }
 
 }
